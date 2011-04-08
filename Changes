@@ -1,4 +1,7 @@
 Revision history for Algorithm-BMI
 
+0.02    Fri Apr 08 16:51:25 2011
+        - Changed the encoding of unit test script 01-unit-test.t to ANSI.
+
 0.01    Wed Apr 06 17:09:10 2011
         - First version released.
