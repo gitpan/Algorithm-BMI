@@ -1,5 +1,10 @@
 Revision history for Algorithm-BMI
 
+0.03    Tue Apr 12 17:48:11 2011
+        - Updated CONSTRUCTOR to set mass_unit 'kg' and height_unit 'm' by default.
+        - Added internal method _validate_param().
+        - Added unit test to 01-unit-test.t for method _validate_param().
+
 0.02    Fri Apr 08 16:51:25 2011
         - Changed the encoding of unit test script 01-unit-test.t to ANSI.
 

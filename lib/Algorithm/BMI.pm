@@ -12,11 +12,11 @@ Algorithm::BMI - Interface to Body Mass Index.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 Readonly my $UPPER_LIMIT_BMI => 25;
 
 =head1 SYNOPSIS
@@ -34,14 +34,14 @@ their actual body fat levels.
 
 =head1 CONSTRUCTOR
 
-It expects refrence to an anonymous hash with the following keys:
+It expects optionally reference to an anonymous hash with the following keys:
 
-    ----------------------------------
-    | key           | Value          |
-    ----------------------------------
-    | mass_unit     | kg / lb / st   |
-    | height_unit   | m  / in / ft   |
-    ----------------------------------
+    -------------------------------------------------
+    | key           | Value          |  Default     |
+    -------------------------------------------------
+    | mass_unit     | kg / lb / st   |  kg          | 
+    | height_unit   | m  / in / ft   |  m           |
+    -------------------------------------------------
 
 =cut
 
@@ -50,6 +50,9 @@ sub new
     my $class = shift;
     my $param = shift;
     
+    _validate_param($param);
+    $param->{mass_unit}   = 'kg' unless defined($param->{mass_unit});
+    $param->{height_unit} = 'm'  unless defined($param->{height_unit});
     bless $param, $class;
     return $param;
 }
@@ -258,6 +261,25 @@ sub _get_height
     {
         croak("ERROR: Invalid unit for height.\n");
     }
+}
+
+sub _validate_param
+{
+    my $param = shift;
+    return unless defined $param;
+    
+    croak("ERROR: Input param has to be a ref to HASH.\n")
+        if (ref($param) ne 'HASH');
+    croak("ERROR: Invalid number of keys found in the input hash.\n")
+        if (scalar(keys %{$param}) != 2);
+    croak("ERROR: Missing key mass_unit.\n")
+        unless exists($param->{mass_unit});
+    croak("ERROR: Missing key height_unit.\n")
+        unless exists($param->{height_unit});
+    croak("ERROR: Invalid value for mass_unit.\n")
+        unless ($param->{mass_unit} =~ /kg|lb|st/i);
+    croak("ERROR: Invalid value for height_unit.\n")
+        unless ($param->{height_unit} =~ /m|in|ft/i);
 }
 
 =head1 AUTHOR
