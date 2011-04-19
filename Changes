@@ -1,5 +1,9 @@
 Revision history for Algorithm-BMI
 
+0.04    Tue Apr 19 14:27:25 2011
+        - Renamed title "SYNOPSIS" to "DESCRIPTION".
+        - Minor cosmetics changes.
+
 0.03    Tue Apr 12 17:48:11 2011
         - Updated CONSTRUCTOR to set mass_unit 'kg' and height_unit 'm' by default.
         - Added internal method _validate_param().
